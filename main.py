@@ -41,6 +41,10 @@ def main() -> None:
     assert WORD.strip() == WORD and "\n" not in WORD
     assert " " not in WORD and "\t" not in WORD, "entry must be one word"
     assert WORD.isalpha(), "entry must be a single word"
+    # No hyphen or apostrophe: a hyphenated compound or a possessive
+    # reads as two words to the judge's first criterion, so the entry
+    # must be one unbroken alphabetic token.
+    assert "-" not in WORD and "'" not in WORD, "entry must be one token"
     os.makedirs("/output", exist_ok=True)
     # Plain write: the grader reads /output/entry.txt as another user,
     # so the file must keep the default readable mode (a mkstemp file
